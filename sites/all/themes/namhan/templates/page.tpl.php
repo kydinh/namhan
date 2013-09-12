@@ -4,164 +4,39 @@
 <div class="header_top">
     <div class="container">
 
-        <div class="logo">
-            <a href="index.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/logo.png" alt=""></a>
-        </div>
+        <?php if ($logo): ?>
+            <div class="logo">
+                <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
+                    <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+                </a>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($site_name || $site_slogan): ?>
+            <?php if ($site_slogan): ?>
+                <div id="site-slogan"<?php if ($hide_site_slogan) { print ' class="element-invisible"'; } ?>>
+                    <?php print $site_slogan; ?>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
 
         <!-- topmenu -->
-        <nav id="topmenu" class="clearfix">
-            <ul class="dropdown">
-                <li class="menu-level-0 current-menu-ancestor"><a href="#"><span>Home</span></a>
-                    <ul class="submenu-1">
-                        <li class="menu-level-1 current-menu-item"><a href="index.html"><span>Home Slider 1</span></a></li>
-                        <li class="menu-level-1"><a href="index2.html"><span>Home Slider 2</span></a></li>
-                        <li class="menu-level-1"><a href="index3.html"><span>Home Slider 3</span></a></li>
-                    </ul>
-                </li>
-                <li class="menu-level-0"><a href="#"><span>Our Cars</span></a>
-                    <ul class="submenu-1">
-                        <li class="menu-level-1"><a href="offers-search.html"><span>Search Page</span></a></li>
-                        <li class="menu-level-1"><a href="offers-list.html"><span>Offers List - Filter Right</span></a></li>
-                        <li class="menu-level-1"><a href="offers-list-left.html"><span>Offers List - Filter Left</span></a></li>
-                        <li class="menu-level-1"><a href="car-makers.html"><span>Car Makers</span></a></li>
-                    </ul>
-                </li>
-                <li class="menu-level-0 mega-nav"><a href="special-offers.html"><span>SPECIAL OFFERS</span></a>
-                    <ul class="submenu-1">
-                        <li class="menu-level-1 mega-nav-widget">
-                            <!-- widget recent entries -->
-                            <div class="widget-container widget_recent_entries">
-                                <h3 class="widget-title">Latest News</h3>
-                                <ul>
-                                    <li class="clearfix">
-                                        <a href="blog-details.html" class="link-name">What You Should Know No About Using a CDN With WordPress</a>
-                                        <div class="post-meta"><span class="post-date">posted 1 days ago</span> <a href="blog-details.html#comments">3 comments</a></div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <a href="blog-details.html" class="link-name">Black Friday! Everything half price. K, Thanx, Bye!</a>
-                                        <div class="post-meta"><span class="post-date">posted 2 days ago</span> <a href="blog-details.html#comments">23 comments</a></div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <a href="blog-details.html" class="link-name">Our first FREE WordPress theme is now available - Gadgetry</a>
-                                        <div class="post-meta"><span class="post-date">posted 3 days ago</span> <a href="blog-details.html#comments">34 comments</a></div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!--/ widget recent entries -->
-                        </li>
-                        <li class="menu-level-1 mega-nav-widget">
-                            <!-- widget latest entries from category -->
-                            <div class="widget-container widget_featured_posts">
-                                <h3 class="widget-title">Fresh from our Blog</h3>
-                                <ul>
-                                    <li class="post-item">
-                                        <div class="post-title"><a href="blog-details.html">What Today's Video Games Say About The Moment We Live In</a></div>
-                                        <div class="post-meta">written by <span class="post-author">Jenna Pratt</span></div>
-                                        <div class="post-image"><a href="blog-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/featured_thumb_1.jpg" alt=""></a></div>
-                                        <div class="post-descr">
-                                            <p>Vivamus hendrerit arcu sed erat molestie adro vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. </p>
-                                        </div>
-                                        <div class="post-more"><a href="blog-details.html">READ THE ARTICLE</a></div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!--/ widget latest entries from category -->
-                        </li>
-                        <li class="menu-level-1 mega-nav-widget">
-                            <!-- twiiter widget -->
-                            <div class="widget-container widget_twitter">
-                                <h3 class="widget-title">Twitter Activity</h3>
-                                <div class="tweet_list">
-                                    <div class="tweet_item clearfix">
-                                        <div class="tweet_image"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/twitter_avatar.png" width="30" height="30" alt="" /></div>
-                                        <div class="tweet_text">
-                                            <div class="inner">
-                                                Lorem ipsum dolor sit amet, consectetur adiping elit.  <a href="#">http://t.co/dwRp8eds</a>
-                                                <span class="tweet_time">About 3 hours ago</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="tweet_item clearfix">
-                                        <div class="tweet_image"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/twitter_avatar.png" width="30" height="30" alt="" /></div>
-                                        <div class="tweet_text">
-                                            <div class="inner">
-                                                Lorem ipsum dolor sit amet, consectetur adiping elit. Class aptent taciti sociosqu ad litora torquent per conubia nostr <a href="#">http://t.co/dwRp8eds</a>
-                                                <span class="tweet_time">About 7 hours ago ago</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#" class="link-more">FOLLOW US ON TWITTER</a>
-                            </div>
-                            <!--/ twiiter widget -->
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-level-0 mega-nav"><a href="services.html"><span>Services</span></a>
-                    <ul class="submenu-1">
-                        <li class="menu-level-1 mega-nav-widget">
-                            <!-- widget text -->
-                            <div class="widget-container widget_text">
-                                <h3 class="widget-title">Welcome Text</h3>
-                                <div class="textwidget">
-                                    <p>Easily add a functional and highly customizable Mega Menu to your WordPress website. Choose your option of five different color schemes within the WordPress admin, or style it to your liking with your own stylesheet. </p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adiping elit. Class aptent taciti sociosqu ad litora torquent per conubia nostr.</p>
-                                </div>
-                            </div>
-                            <!--/ widget text -->
-                        </li>
-                        <li class="menu-level-1"><a href="#"><span>Vehicles</span></a>
-                            <ul class="submenu-2">
-                                <li class="menu-level-2"><a href="blog.html"><span>Motorbikes</span></a></li>
-                                <li class="menu-level-2"><a href="blog.html"><span>Compacts</span></a></li>
-                                <li class="menu-level-2"><a href="blog.html"><span>Sedans</span></a></li>
-                                <li class="menu-level-2"><a href="blog.html"><span>4x4 SUVs</span></a></li>
-                                <li class="menu-level-2"><a href="blog.html"><span>Pickups</span></a></li>
-                                <li class="menu-level-2 more-nav"><a href="blog.html"><span>view all</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-level-1"><a href="#"><span>Submenu</span></a>
-                            <ul class="submenu-2">
-                                <li class="menu-level-2"><a href="blog.html"><span>1st Blog Category</span></a></li>
-                                <li class="menu-level-2"><a href="blog.html"><span>Second Category</span></a></li>
-                                <li class="menu-level-2"><a href="blog.html"><span>3rd Category</span></a></li>
-                                <li class="menu-level-2"><a href="blog.html"><span>Forth Category</span></a></li>
-                                <li class="menu-level-2"><a href="blog.html"><span>Another Category</span></a></li>
-                                <li class="menu-level-2 more-nav"><a href="blog.html"><span>view all</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-level-0"><a href="#"><span>Pages</span></a>
-                    <ul class="submenu-1">
-                        <li class="menu-level-1"><a href="blog.html"><span>Blog</span></a></li>
-                        <li class="menu-level-1"><a href="page-about.html"><span>About Page</span></a></li>
-                        <li class="menu-level-1"><a href="page-faq.html"><span>FAQ</span></a></li>
-                        <li class="menu-level-1"><a href="page-pricing.html"><span>Pricing Page</span></a></li>
-                        <li class="menu-level-1"><a href="#"><span>Shortcodes</span></a>
-                            <ul class="submenu-2">
-                                <li class="menu-level-2"><a href="shortcodes-buttons.html"><span>Buttons & Lists</span></a></li>
-                                <li class="menu-level-2"><a href="shortcodes-text.html"><span>Text & Images</span></a></li>
-                                <li class="menu-level-2"><a href="shortcodes-charts.html"><span>Charts</span></a></li>
-                                <li class="menu-level-2"><a href="shortcodes-columns.html"><span>Columns</span></a></li>
-                                <li class="menu-level-2"><a href="shortcodes-columns-full.html"><span>Columns full width</span></a></li>
-                                <li class="menu-level-2"><a href="shortcodes-lightbox.html"><span>Lightbox</span></a></li>
-                                <li class="menu-level-2"><a href="shortcodes-media.html"><span>Videos & Galleries</span></a></li>
-                                <li class="menu-level-2"><a href="shortcodes-maps.html"><span>Google Maps</span></a></li>
-                                <li class="menu-level-2"><a href="shortcodes-tabs.html"><span>Tabs & Toggles</span></a></li>
-                                <li class="menu-level-2"><a href="shortcodes-tables.html"><span>Boxes & Tables</span></a></li>
-                                <li class="menu-level-2"><a href="shortcodes-typography.html"><span>Typography</span></a></li>
-                                <li class="menu-level-2"><a href="shortcodes-widgets.html"><span>Custom Widgets</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-level-1"><a href="blog-sidebar-left.html"><span>Sidebar Left</span></a></li>
-                        <li class="menu-level-1"><a href="page-404.html"><span>Page 404</span></a></li>
-                    </ul>
-                </li>
-                <li class="menu-level-0"><a href="contact.html"><span>Location</span></a></li>
-            </ul>
-        </nav>
+        <?php if ($main_menu): ?>
+            <div id="topmenu" class="navigation">
+                <?php print theme('links__system_main_menu', array(
+                    'links' => $main_menu,
+                    'attributes' => array(
+                        'id' => 'main-menu-links',
+                        'class' => array('links', 'clearfix', 'dropdown'),
+                    ),
+                    'heading' => array(
+                        'text' => t('Main menu'),
+                        'level' => 'h2',
+                        'class' => array('element-invisible'),
+                    ),
+                )); ?>
+            </div> <!-- /#main-menu -->
+        <?php endif; ?>
         <!--/ topmenu -->
     </div>
 </div>
@@ -169,259 +44,21 @@
 
 <!-- header -->
 <div class="header" style="background:#000">
-
-    <!-- header slider -->
-    <div class="fullwidthbanner-container">
-        <div class="fullwidthbanner">
-            <ul>
-                <li data-transition="fade" data-slotamount="1" data-masterspeed="500">
-                    <img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/slider_1_1.jpg" data-fullwidthcentering="on">
-
-                    <div class="caption sft text_line" data-x="10" data-y="190" data-speed="900" data-start="800" data-easing="easeOutExpo"></div>
-                    <div class="caption sfb text_line" data-x="10" data-y="300" data-speed="900" data-start="800" data-easing="easeOutExpo"></div>
-                    <div class="caption sfl white_text big_title" data-x="10" data-y="220" data-speed="900" data-start="500" data-easing="easeOutExpo">
-                        <a href="#"><strong>LUXURY CARS</strong></a>
-                    </div>
-                    <div class="caption sfr white_text subtitle" data-x="10" data-y="257" data-speed="900" data-start="700" data-easing="easeOutExpo">
-                        Second-hand classics from <span>$25.990</span>
-                    </div>
-
-                </li>
-                <li data-transition="fade" data-slotamount="7" data-masterspeed="500">
-                    <img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/slider_1_2.jpg" data-fullwidthcentering="on">
-
-                    <div class="caption sft text_line" data-x="550" data-y="250" data-speed="900" data-start="800" data-easing="easeOutExpo"></div>
-                    <div class="caption sfb text_line" data-x="550" data-y="360" data-speed="900" data-start="800" data-easing="easeOutExpo"></div>
-
-                    <div class="caption sft white_text big_title" data-x="550" data-y="280" data-speed="900" data-start="500" data-easing="easeOutExpo">
-                        <a href="#"><strong>NEW & 2nd HAND</strong></a>
-                    </div>
-                    <div class="caption sfb white_text subtitle" data-x="550" data-y="317" data-speed="900" data-start="700" data-easing="easeOutExpo">
-                        More than <span>3500</span> vehicles in our offer
-                    </div>
-                </li>
-                <li data-transition="fade" data-slotamount="7" data-masterspeed="500">
-                    <img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/slider_1_3.jpg" data-fullwidthcentering="on">
-
-                    <div class="caption sft text_line" data-x="10" data-y="190" data-speed="900" data-start="800" data-easing="easeOutExpo"></div>
-                    <div class="caption sfb text_line" data-x="10" data-y="300" data-speed="900" data-start="800" data-easing="easeOutExpo"></div>
-
-                    <div class="caption sfr white_text big_title" data-x="10" data-y="220" data-speed="900" data-start="500" data-easing="easeOutExpo">
-                        <a href="#"><strong>QUALITY OF SERVICE</strong></a>
-                    </div>
-                    <div class="caption sfl white_text subtitle" data-x="10" data-y="257" data-speed="900" data-start="700" data-easing="easeOutExpo">
-                        We guarantee <span>BEST PRICES</span> for second-hand cars
-                    </div>
-                </li>
-                <li data-transition="fade" data-slotamount="7" data-masterspeed="500">
-                    <img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/slider_1_4.jpg" data-fullwidthcentering="on">
-
-                    <div class="caption sft text_line" data-x="10" data-y="190" data-speed="900" data-start="800" data-easing="easeOutExpo"></div>
-                    <div class="caption sfb text_line" data-x="10" data-y="300" data-speed="900" data-start="800" data-easing="easeOutExpo"></div>
-
-                    <div class="caption sft black_text big_title" data-x="10" data-y="220" data-speed="900" data-start="500" data-easing="easeOutExpo">
-                        <a href="#"><strong>SUPER SPORTS</strong></a>
-                    </div>
-                    <div class="caption sfb black_text subtitle" data-x="10" data-y="257" data-speed="900" data-start="700" data-easing="easeOutExpo">
-                        Only the finest breed of <span>Supercars</span>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <script>
-
-
-        jQuery(document).ready(function($) {
-
-            if ($.fn.cssOriginal!=undefined)
-                $.fn.css = $.fn.cssOriginal;
-
-            $('.fullwidthbanner').revolution({
-                delay:5000,
-                startwidth:950,
-                startheight:617,
-
-                onHoverStop:"off",						// Stop Banner Timet at Hover on Slide on/off
-                hideThumbs:0,
-                navigationType:"bullet",				// bullet, thumb, none
-                navigationArrows:"none",				// nexttobullets, solo (old name verticalcentered), none
-
-                navigationStyle:"round",				// round,square,navbar,round-old,square-old,navbar-old, or any from the list in the docu (choose between 50+ different item), custom
-
-                navigationHAlign:"center",				// Vertical Align top,center,bottom
-                navigationVAlign:"bottom",				// Horizontal Align left,center,right
-                navigationHOffset:0,
-                navigationVOffset:23,
-
-                touchenabled:"on",						// Enable Swipe Function : on/off
-
-                stopAtSlide:-1,							// Stop Timer if Slide "x" has been Reached. If stopAfterLoops set to 0, then it stops already in the first Loop at slide X which defined. -1 means do not stop at any slide. stopAfterLoops has no sinn in this case.
-                stopAfterLoops:-1,						// Stop Timer if All slides has been played "x" times. IT will stop at THe slide which is defined via stopAtSlide:x, if set to -1 slide never stop automatic
-
-                hideCaptionAtLimit:0,					// It Defines if a caption should be shown under a Screen Resolution ( Basod on The Width of Browser)
-                hideAllCaptionAtLilmit:0,				// Hide all The Captions if Width of Browser is less then this value
-                hideSliderAtLimit:0,					// Hide the whole slider, and stop also functions if Width of Browser is less than this value
-
-                fullWidth:"on",
-                shadow:0								//0 = no Shadow, 1,2,3 = 3 Different Art of Shadows -  (No Shadow in Fullwidth Version !)
-
-            });
-        });
-    </script>
-    <!--/ header slider -->
+    <?php print render($page['header']); ?>
 
 </div>
 <!--/ header -->
 
 <!-- middle -->
-
-<div class="middle_row row_white search_row">
-    <div class="container">
-        <form action="#" class="search_form advsearch_hide clearfix">
-            <div class="row field_select">
-                <label class="label_title">Select Maker:</label>
-                <select class="select_styled" name="car_maker">
-                    <option value="1">Alfa Romeo</option>
-                    <option value="2">Audi</option>
-                    <option value="3">BMW</option>
-                    <option value="4">Chevrolet</option>
-                    <option value="5">Ford</option>
-                    <option value="6">Honda</option>
-                    <option value="7">Lexus</option>
-                    <option value="8">Mazda</option>
-                    <option value="9">Mercedes Benz</option>
-                    <option value="10">Mitsubishi</option>
-                    <option value="11">Nissan</option>
-                    <option value="12">Opel</option>
-                    <option value="13">Toyota</option>
-                    <option value="14">Volkswagen</option>
-                    <option value="15">Volvo</option>
-                </select>
-            </div>
-
-            <div class="row field_select">
-                <label class="label_title">Select Model:</label>
-                <select class="select_styled" name="car_model">
-                    <option value="1">626</option>
-                    <option value="2">323</option>
-                    <option value="3">3</option>
-                    <option value="4">5</option>
-                    <option value="5">7</option>
-                    <option value="6">СX-7</option>
-                    <option value="7">MVP</option>
-                    <option value="8">RX-8</option>
-                    <option value="9">MX-3</option>
-                    <option value="10">MX-5</option>
-                    <option value="11">MX-6</option>
-                    <option value="12">BT-50</option>
-                    <option value="13">CX-9</option>
-                </select>
-            </div>
-
-            <div class="row field_select">
-                <label class="label_title">1st Registration from:</label>
-                <select class="select_styled" name="car_year">
-                    <option value="1">2001</option>
-                    <option value="2">2002</option>
-                    <option value="3">2003</option>
-                    <option value="4">2004</option>
-                    <option value="5">2005</option>
-                    <option value="6">2006</option>
-                    <option value="7">2007</option>
-                    <option value="8">2008</option>
-                    <option value="9">2009</option>
-                    <option value="10">2010</option>
-                    <option value="11">2011</option>
-                    <option value="12">2012</option>
-                </select>
-            </div>
-
-            <div class="row field_select">
-                <label class="label_title">Price until:</label>
-                <select class="select_styled" name="car_model">
-                    <option value="1">3000 EUR</option>
-                    <option value="2">5000 EUR</option>
-                    <option value="3">7000 EUR</option>
-                    <option value="4" selected>10000 EUR</option>
-                    <option value="5">20000 EUR</option>
-                    <option value="6">Unlimited</option>
-                </select>
-            </div>
-
-            <div class="adv_search_hidden clearfix">
-                <div class="row field_select">
-                    <label class="label_title">Mileage up to:</label>
-                    <select class="select_styled" name="car_mileage">
-                        <option value="1">50.000</option>
-                        <option value="2">100.000</option>
-                        <option value="3">150.000</option>
-                        <option value="4">200.000</option>
-                        <option value="5">300.000 +</option>
-                    </select>
-                </div>
-
-                <div class="row field_select">
-                    <label class="label_title">Fuel Type:</label>
-                    <select class="select_styled" name="car_fuel_type">
-                        <option value="1">Petrol </option>
-                        <option value="2">Diesel</option>
-                        <option value="3">Natural Gas</option>
-                        <option value="4">LPG</option>
-                        <option value="5">Electric</option>
-                        <option value="6">Hybrid </option>
-                    </select>
-                </div>
-
-                <div class="row field_select">
-                    <label class="label_title">Vehicle Type:</label>
-                    <select class="select_styled" name="car_type">
-                        <option value="1">Compact Cars</option>
-                        <option value="2">SUVs & PickUps </option>
-                        <option value="3">Estate Saloons</option>
-                        <option value="4">Sedan Cars</option>
-                        <option value="5">Sports Cars</option>
-                        <option value="6">Van & Minibus</option>
-                    </select>
-                </div>
-
-                <div class="row field_select">
-                    <label class="label_title">Country / State:</label>
-                    <select class="select_styled" name="car_location">
-                        <option value="1">New York</option>
-                        <option value="2">San Diego</option>
-                        <option value="3">Chicago</option>
-                        <option value="4">San Francisco</option>
-                        <option value="5">Los Angeles</option>
-                        <option value="6">Boston</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row rowSubmit">
-                <label class="label_title" id="adv_search_open">Advanced Search</label>
-                <span class="btn btn_search"><input type="submit" value="SEARCH"></span>
-            </div>
-        </form>
-        <script type="text/javascript">
-            jQuery(document).ready(function($) {
-                // Show/Hide Advanced Search
-                $(".adv_search_hidden").hide();
-                $("#adv_search_open").click(function(){
-                    if ($(this).closest(".search_form").hasClass("advsearch_hide")) {
-                        $(".adv_search_hidden").stop().slideDown();
-                        $(this).html("Close Advanced Search");
-                    } else {
-                        $(".adv_search_hidden").stop().slideUp();
-                        $(this).html("Advanced Search");
-                    }
-                    $(this).closest(".search_form").toggleClass("advsearch_hide");
-                });
-            });
-        </script>
+<!-- breadcrumbs -->
+<?php if ($breadcrumb): ?>
+    <div class="middle_row row_white breadcrumbs">
+        <div class="container">
+                <div id="breadcrumb"><?php print $breadcrumb; ?></div>
+        </div>
     </div>
-</div>
+<?php endif; ?>
+<!--/ breadcrumbs -->
 
 <div class="middle_row row_light_gray">
     <div class="container clearfix">
