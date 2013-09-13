@@ -1,474 +1,247 @@
-<div class="body_wrap homepage">
+<?php
 
-<!-- header top bar -->
-<div class="header_top">
-    <div class="container">
+/**
+ * @file
+ * Bartik's theme implementation to display a single Drupal page.
+ *
+ * The doctype, html, head and body tags are not in this template. Instead they
+ * can be found in the html.tpl.php template normally located in the
+ * modules/system directory.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - $base_path: The base URL path of the Drupal installation. At the very
+ *   least, this will always default to /.
+ * - $directory: The directory the template is located in, e.g. modules/system
+ *   or themes/bartik.
+ * - $is_front: TRUE if the current page is the front page.
+ * - $logged_in: TRUE if the user is registered and signed in.
+ * - $is_admin: TRUE if the user has permission to access administration pages.
+ *
+ * Site identity:
+ * - $front_page: The URL of the front page. Use this instead of $base_path,
+ *   when linking to the front page. This includes the language domain or
+ *   prefix.
+ * - $logo: The path to the logo image, as defined in theme configuration.
+ * - $site_name: The name of the site, empty when display has been disabled
+ *   in theme settings.
+ * - $site_slogan: The slogan of the site, empty when display has been disabled
+ *   in theme settings.
+ * - $hide_site_name: TRUE if the site name has been toggled off on the theme
+ *   settings page. If hidden, the "element-invisible" class is added to make
+ *   the site name visually hidden, but still accessible.
+ * - $hide_site_slogan: TRUE if the site slogan has been toggled off on the
+ *   theme settings page. If hidden, the "element-invisible" class is added to
+ *   make the site slogan visually hidden, but still accessible.
+ *
+ * Navigation:
+ * - $main_menu (array): An array containing the Main menu links for the
+ *   site, if they have been configured.
+ * - $secondary_menu (array): An array containing the Secondary menu links for
+ *   the site, if they have been configured.
+ * - $breadcrumb: The breadcrumb trail for the current page.
+ *
+ * Page content (in order of occurrence in the default page.tpl.php):
+ * - $title_prefix (array): An array containing additional output populated by
+ *   modules, intended to be displayed in front of the main title tag that
+ *   appears in the template.
+ * - $title: The page title, for use in the actual HTML content.
+ * - $title_suffix (array): An array containing additional output populated by
+ *   modules, intended to be displayed after the main title tag that appears in
+ *   the template.
+ * - $messages: HTML for status and error messages. Should be displayed
+ *   prominently.
+ * - $tabs (array): Tabs linking to any sub-pages beneath the current page
+ *   (e.g., the view and edit tabs when displaying a node).
+ * - $action_links (array): Actions local to the page, such as 'Add menu' on the
+ *   menu administration interface.
+ * - $feed_icons: A string of all feed icons for the current page.
+ * - $node: The node object, if there is an automatically-loaded node
+ *   associated with the page, and the node ID is the second argument
+ *   in the page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - $page['header']: Items for the header region.
+ * - $page['featured']: Items for the featured region.
+ * - $page['highlighted']: Items for the highlighted content region.
+ * - $page['help']: Dynamic help text, mostly for admin pages.
+ * - $page['content']: The main content of the current page.
+ * - $page['sidebar_first']: Items for the first sidebar.
+ * - $page['triptych_first']: Items for the first triptych.
+ * - $page['triptych_middle']: Items for the middle triptych.
+ * - $page['triptych_last']: Items for the last triptych.
+ * - $page['footer_firstcolumn']: Items for the first footer column.
+ * - $page['footer_secondcolumn']: Items for the second footer column.
+ * - $page['footer_thirdcolumn']: Items for the third footer column.
+ * - $page['footer_fourthcolumn']: Items for the fourth footer column.
+ * - $page['footer']: Items for the footer region.
+ *
+ * @see template_preprocess()
+ * @see template_preprocess_page()
+ * @see template_process()
+ * @see bartik_process_page()
+ * @see html.tpl.php
+ */
+?>
+<div id="page-wrapper"><div id="page">
 
-        <?php if ($logo): ?>
-            <div class="logo">
-                <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-                    <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-                </a>
+  <div id="header" class="<?php print $secondary_menu ? 'with-secondary-menu': 'without-secondary-menu'; ?>"><div class="section clearfix">
+
+    <?php if ($logo): ?>
+      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
+        <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+      </a>
+    <?php endif; ?>
+
+    <?php if ($site_name || $site_slogan): ?>
+      <div id="name-and-slogan"<?php if ($hide_site_name && $hide_site_slogan) { print ' class="element-invisible"'; } ?>>
+
+        <?php if ($site_name): ?>
+          <?php if ($title): ?>
+            <div id="site-name"<?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>>
+              <strong>
+                <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
+              </strong>
             </div>
+          <?php else: /* Use h1 when the content title is empty */ ?>
+            <h1 id="site-name"<?php if ($hide_site_name) { print ' class="element-invisible"'; } ?>>
+              <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
+            </h1>
+          <?php endif; ?>
         <?php endif; ?>
 
-        <?php if ($site_name || $site_slogan): ?>
-            <?php if ($site_slogan): ?>
-                <div id="site-slogan"<?php if ($hide_site_slogan) { print ' class="element-invisible"'; } ?>>
-                    <?php print $site_slogan; ?>
-                </div>
-            <?php endif; ?>
+        <?php if ($site_slogan): ?>
+          <div id="site-slogan"<?php if ($hide_site_slogan) { print ' class="element-invisible"'; } ?>>
+            <?php print $site_slogan; ?>
+          </div>
         <?php endif; ?>
 
-        <!-- topmenu -->
-        <?php if ($main_menu): ?>
-            <div id="topmenu" class="navigation">
-                <?php print theme('links__system_main_menu', array(
-                    'links' => $main_menu,
-                    'attributes' => array(
-                        'id' => 'main-menu-links',
-                        'class' => array('links', 'clearfix', 'dropdown'),
-                    ),
-                    'heading' => array(
-                        'text' => t('Main menu'),
-                        'level' => 'h2',
-                        'class' => array('element-invisible'),
-                    ),
-                )); ?>
-            </div> <!-- /#main-menu -->
-        <?php endif; ?>
-        <!--/ topmenu -->
-    </div>
-</div>
-<!--/ header top bar -->
+      </div> <!-- /#name-and-slogan -->
+    <?php endif; ?>
 
-<!-- header -->
-<div class="header" style="background:#000">
     <?php print render($page['header']); ?>
 
-</div>
-<!--/ header -->
+    <?php if ($main_menu): ?>
+      <div id="main-menu" class="navigation">
+        <?php print theme('links__system_main_menu', array(
+          'links' => $main_menu,
+          'attributes' => array(
+            'id' => 'main-menu-links',
+            'class' => array('links', 'clearfix'),
+          ),
+          'heading' => array(
+            'text' => t('Main menu'),
+            'level' => 'h2',
+            'class' => array('element-invisible'),
+          ),
+        )); ?>
+      </div> <!-- /#main-menu -->
+    <?php endif; ?>
 
-<!-- middle -->
-<!-- breadcrumbs -->
-<?php if ($breadcrumb): ?>
-    <div class="middle_row row_white breadcrumbs">
-        <div class="container">
-                <div id="breadcrumb"><?php print $breadcrumb; ?></div>
+    <?php if ($secondary_menu): ?>
+      <div id="secondary-menu" class="navigation">
+        <?php print theme('links__system_secondary_menu', array(
+          'links' => $secondary_menu,
+          'attributes' => array(
+            'id' => 'secondary-menu-links',
+            'class' => array('links', 'inline', 'clearfix'),
+          ),
+          'heading' => array(
+            'text' => t('Secondary menu'),
+            'level' => 'h2',
+            'class' => array('element-invisible'),
+          ),
+        )); ?>
+      </div> <!-- /#secondary-menu -->
+    <?php endif; ?>
+
+  </div></div> <!-- /.section, /#header -->
+
+  <?php if ($messages): ?>
+    <div id="messages"><div class="section clearfix">
+      <?php print $messages; ?>
+    </div></div> <!-- /.section, /#messages -->
+  <?php endif; ?>
+
+  <?php if ($page['featured']): ?>
+    <div id="featured"><div class="section clearfix">
+      <?php print render($page['featured']); ?>
+    </div></div> <!-- /.section, /#featured -->
+  <?php endif; ?>
+
+  <div id="main-wrapper" class="clearfix"><div id="main" class="clearfix">
+
+    <?php if ($breadcrumb): ?>
+      <div id="breadcrumb"><?php print $breadcrumb; ?></div>
+    <?php endif; ?>
+
+    <?php if ($page['sidebar_first']): ?>
+      <div id="sidebar-first" class="column sidebar"><div class="section">
+        <?php print render($page['sidebar_first']); ?>
+      </div></div> <!-- /.section, /#sidebar-first -->
+    <?php endif; ?>
+
+    <div id="content" class="column"><div class="section">
+      <?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
+      <a id="main-content"></a>
+      <?php print render($title_prefix); ?>
+      <?php if ($title): ?>
+        <h1 class="title" id="page-title">
+          <?php print $title; ?>
+        </h1>
+      <?php endif; ?>
+      <?php print render($title_suffix); ?>
+      <?php if ($tabs): ?>
+        <div class="tabs">
+          <?php print render($tabs); ?>
         </div>
-    </div>
-<?php endif; ?>
-<!--/ breadcrumbs -->
-
-<div class="middle_row row_light_gray">
-    <div class="container clearfix">
-        <!-- week offer -->
-        <div class="week_offer">
-            <h2>OFFER OF THE WEEK</h2>
-            <div class="offer_box">
-                <div class="offer_image"><a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/week_offer.jpg" alt=""></a></div>
-                <div class="offer_text">
-                    <h3><a href="offers-details.html">Tesla Model S Prestige</a></h3>
-                    <div class="offer_price">$83.599</div>
-                    <div class="offer_descr">
-                        Fully Electric Tesla S-Model Performance coming to our big show room. Factory order fully tailored by client, price according to options to boot. Expected delivery May/2013, Get your Tesla among the first!.
-                    </div>
-                </div>
-                <div class="link_more"><a href="#">View More Details</a></div>
-            </div>
-        </div>
-        <!--/ week offer -->
-        <!-- special offer -->
-        <div class="special_offers">
-            <h2>SPECIAL DEALS</h2>
-
-            <div id="special_offers">
-                <div class="special_item">
-                    <div class="special_image">
-                        <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/special_offer_1.jpg" alt=""></a>
-                    </div>
-                    <div class="special_text">
-                        <h3><a href="offers-details.html">Range Rover Evoque</a></h3>
-                        <div class="info_row"><span>FIRST REG:</span> FEB 2013</div>
-                        <div class="info_row"><span>FUEL CONS:</span> 32,6 MPG</div>
-                        <div class="info_row"><span>MILEAGE</span> 170,443</div>
-                        <div class="special_price">$32.690</div>
-                    </div>
-                </div>
-
-                <div class="special_item">
-                    <div class="special_image">
-                        <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/special_offer_2.jpg" alt=""></a>
-                    </div>
-                    <div class="special_text">
-                        <h3><a href="offers-details.html">Alfa Romeo Mito</a></h3>
-                        <div class="info_row"><span>FIRST REG:</span> AUG 2012</div>
-                        <div class="info_row"><span>FUEL CONS:</span> 56,6 MPG</div>
-                        <div class="info_row"><span>MILEAGE</span> 30,443</div>
-                        <div class="special_price">$15.690</div>
-                    </div>
-                </div>
-
-                <div class="special_item">
-                    <div class="special_image">
-                        <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/special_offer_3.jpg" alt=""></a>
-                    </div>
-                    <div class="special_text">
-                        <h3><a href="offers-details.html">Mercedes CLA 220d</a></h3>
-                        <div class="info_row"><span>FIRST REG:</span> NOV 2012</div>
-                        <div class="info_row"><span>FUEL CONS:</span> 42,6 MPG</div>
-                        <div class="info_row"><span>MILEAGE</span> 12,443</div>
-                        <div class="special_price">$44.690</div>
-                    </div>
-                </div>
-
-                <div class="special_item">
-                    <div class="special_image">
-                        <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/special_offer_4.jpg" alt=""></a>
-                    </div>
-                    <div class="special_text">
-                        <h3><a href="offers-details.html">Tesla Model S Prestige</a></h3>
-                        <div class="info_row"><span>FIRST REG:</span> FEB 2013</div>
-                        <div class="info_row"><span>FUEL CONS:</span> 32,6 MPG</div>
-                        <div class="info_row"><span>MILEAGE</span> 170,443</div>
-                        <div class="special_price">$32.690</div>
-                    </div>
-                </div>
-
-                <div class="special_item">
-                    <div class="special_image">
-                        <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/special_offer_5.jpg" alt=""></a>
-                    </div>
-                    <div class="special_text">
-                        <h3><a href="offers-details.html">Renault</a></h3>
-                        <div class="info_row"><span>FIRST REG:</span> FEB 2013</div>
-                        <div class="info_row"><span>FUEL CONS:</span> 32,6 MPG</div>
-                        <div class="info_row"><span>MILEAGE</span> 20,443</div>
-                        <div class="special_price">$27.690</div>
-                    </div>
-                </div>
-
-            </div>
-            <a class="prev" id="special_offers_prev" href="#"></a>
-            <a class="next" id="special_offers_next" href="#"></a>
-
-            <div class="link_more"><a href="#">View All Special Offers</a></div>
-
-            <script>
-                jQuery(document).ready(function($) {
-                    function carSpecicalInit() {
-                        var car_specical = $('#special_offers');
-                        car_specical.carouFredSel({
-                            prev : "#special_offers_prev",
-                            next : "#special_offers_next",
-                            infinite: true,
-                            circular: false,
-                            auto: false,
-                            width: '100%',
-                            direction: "down",
-                            scroll: {
-                                items : 1
-                            }
-                        });
-                    }
-                    $(window).load(function() {
-                        carSpecicalInit();
-                    });
-                    var resizeTimer;
-                    $(window).resize(function() {
-                        clearTimeout(resizeTimer);
-                        resizeTimer = setTimeout(carSpecicalInit, 100);
-                    });
-                });
-            </script>
-        </div>
-        <!--/ special offer -->
-    </div>
-</div>
-
-<!-- car types -->
-<div class="middle_row row_gray">
-    <div class="container clearfix">
-
-        <div class="car_types_list">
-            <h2>Choose from a wide variety of vehicles</h2>
-            <ul>
-                <li class="type_hover cart_type_1">
-                    <a href="#" class="front"><strong>SCOOTERS & BIKES</strong> <em>76 OFFERS</em></a>
-                    <a href="#" class="back"><strong>SCOOTERS & BIKES</strong> <em>View more</em></a>
-                </li>
-                <li class="type_hover cart_type_2">
-                    <a href="#" class="front"><strong>SEDANS & ESTATES</strong> <em>1354 OFFERS</em></a>
-                    <a href="#" class="back"><strong>SEDANS & ESTATES</strong> <em>View more</em></a>
-                </li>
-                <li class="type_hover cart_type_3">
-                    <a href="#" class="front"><strong>SPORTS CARS</strong> <em>68 OFFERS</em></a>
-                    <a href="#" class="back"><strong>SPORTS CARS</strong> <em>View more</em></a>
-                </li>
-                <li class="type_hover cart_type_4">
-                    <a href="#" class="front"><strong>SUVS & PICKUPS</strong> <em>512 OFFERS</em></a>
-                    <a href="#" class="back"><strong>SUVS & PICKUPS</strong> <em>View more</em></a>
-                </li>
-                <li class="type_hover cart_type_5">
-                    <a href="#" class="front"><strong>VANS & TRUCKS</strong> <em>255 OFFERS</em></a>
-                    <a href="#" class="back"><strong>VANS & TRUCKS</strong> <em>View more</em></a>
-                </li>
-            </ul>
-            <a href="#" class="link_more">SEE ALL OUR OFFERS</a>
-        </div>
-        <script>
-            jQuery(document).ready(function($) {
-                $('.type_hover').hover(function(){
-                    $(this).addClass('flip');
-                },function(){
-                    $(this).removeClass('flip');
-                });
-            });
-        </script>
-
-    </div>
-</div>
-<!--/ car types -->
-
-<!-- latest_offers -->
-<div class="middle_row latest_offers">
-    <div class="container clearfix">
-        <h2>LATEST CARS IN SHOWROOM</h2>
-
-        <a href="#" class="link_more">View All Latest Added</a>
-    </div>
-
-    <div id="latest_offers">
-        <div class="latest_item">
-            <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/prod_img_01.jpg" alt=""></a>
-            <a href="offers-details.html">Mercedes-Benz ML 350</a>
-        </div>
-        <div class="latest_item">
-            <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/prod_img_02.jpg" alt=""></a>
-            <a href="offers-details.html">Porsche CAYENNE S</a>
-        </div>
-        <div class="latest_item">
-            <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/prod_img_03.jpg" alt=""></a>
-            <a href="offers-details.html">Infiniti FX 37 S Premium</a>
-        </div>
-        <div class="latest_item">
-            <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/prod_img_04.jpg" alt=""></a>
-            <a href="offers-details.html">Volvo XC60 D5 RE-Design</a>
-        </div>
-        <div class="latest_item">
-            <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/prod_img_05.jpg" alt=""></a>
-            <a href="offers-details.html">BMW X5 Adaptive Drive Display</a>
-        </div>
-        <div class="latest_item">
-            <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/prod_img_06.jpg" alt=""></a>
-            <a href="offers-details.html">Land Rover Sport SDV6 HSE</a>
-        </div>
-        <div class="latest_item">
-            <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/prod_img_07.jpg" alt=""></a>
-            <a href="offers-details.html">Audi Q7 S-LINE PANORAMA</a>
-        </div>
-        <div class="latest_item">
-            <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/prod_img_08.jpg" alt=""></a>
-            <a href="offers-details.html">Volkswagen Touareg R-Line</a>
-        </div>
-        <div class="latest_item">
-            <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/prod_img_09.jpg" alt=""></a>
-            <a href="offers-details.html">Alfa Romeo Brera JTDm 2008</a>
-        </div>
-    </div>
-
-    <a class="prev" id="latest_offers_prev" href="#"></a>
-    <a class="next" id="latest_offers_next" href="#"></a>
-
-    <script>
-        jQuery(document).ready(function($) {
-            var screenRes = $(window).width();
-
-            $('#latest_offers').carouFredSel({
-                prev : "#latest_offers_prev",
-                next : "#latest_offers_next",
-                infinite: false,
-                circular: true,
-                auto: false,
-                width: '100%',
-                scroll: {
-                    items : 1,
-                    onBefore: function (data) {
-                        if (screenRes > 900) {
-                            data.items.visible.eq(0).animate({opacity: 0.15},300);
-                            data.items.old.eq(-1).animate({opacity: 1},300);
-                            data.items.visible.eq(-1).animate({opacity: 0.15},300);
-                        }
-                    },
-                    onAfter: function (data) {
-                        if (screenRes > 900) {
-                            data.items.old.eq(0).animate({opacity: 1},300);
-                        }
-                    }
-                }
-            });
-            if (screenRes > 900) {
-                var vis_items = $("#latest_offers").triggerHandler("currentVisible");
-                vis_items.eq(-1).animate({opacity: 0.15},100);
-                vis_items.eq(0).animate({opacity: 0.15},100);
-            }
-        });
-    </script>
-</div>
-<!--/ latest_offers -->
-
-<!-- testimonials -->
-<div class="middle_row row_white testimonials">
-    <div class="container">
-
-        <div class="slider_container clearfix" id="testimonials">
-            <div class="slider-item">
-                <div class="quote-text">
-                    <p><a href="#">AutoTrader</a> team is very proffessional and has found for me the perfect car for my needs. I'll be sure to give them a call whenever I'll be needing a new set of wheels! Highly recommended!</p>
-                </div>
-                <div class="quote-author"><span>BRENT JARVIS</span>, Customer</div>
-            </div>
-            <div class="slider-item">
-                <div class="quote-text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-                <div class="quote-author"><span>James Backer</span>, Buyer</div>
-            </div>
-            <div class="slider-item">
-                <div class="quote-text">
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. We have to say it has made us delighted we chose Medica.</p>
-                </div>
-                <div class="quote-author"><span>Mr. Smith</span>, Partner</div>
-            </div>
-        </div>
-        <a class="prev" id="testimonials_prev" href="#"></a>
-        <a class="next" id="testimonials_next" href="#"></a>
-        <script>
-            jQuery(document).ready(function($) {
-                $('#testimonials').carouFredSel({
-                    next : "#testimonials_next",
-                    prev : "#testimonials_prev",
-                    infinite: false,
-                    items: 1,
-                    auto: false,
-                    scroll: {
-                        items : 1,
-                        fx: "crossfade",
-                        easing: "linear",
-                        duration: 300
-                    }
-                });
-            });
-        </script>
-
-    </div>
-</div>
-<!--/ testimonials -->
-
-<!-- popular brands -->
-<div class="middle_row row_light_gray brand_list">
-    <div class="container">
-        <h2>MOST POPULAR BRANDS:</h2>
-        <ul>
-            <li><a href="#"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/brand_logo_1.png" alt=""></a></li>
-            <li><a href="#"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/brand_logo_2.png" alt=""></a></li>
-            <li><a href="#"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/brand_logo_3.png" alt=""></a></li>
-            <li><a href="#"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/brand_logo_4.png" alt=""></a></li>
-            <li><a href="#"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/brand_logo_5.png" alt=""></a></li>
-            <li><a href="#"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/brand_logo_6.png" alt=""></a></li>
-            <li><a href="#"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/brand_logo_7.png" alt=""></a></li>
-            <li><a href="#"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/brand_logo_8.png" alt=""></a></li>
+      <?php endif; ?>
+      <?php print render($page['help']); ?>
+      <?php if ($action_links): ?>
+        <ul class="action-links">
+          <?php print render($action_links); ?>
         </ul>
+      <?php endif; ?>
+      <?php print render($page['content']); ?>
+      <?php print $feed_icons; ?>
 
-        <a href="#" class="link_more">View All Popular Brands</a>
-    </div>
-</div>
-<!--/ popular brands -->
+    </div></div> <!-- /.section, /#content -->
 
-<!--/ middle -->
+    <?php if ($page['sidebar_second']): ?>
+      <div id="sidebar-second" class="column sidebar"><div class="section">
+        <?php print render($page['sidebar_second']); ?>
+      </div></div> <!-- /.section, /#sidebar-second -->
+    <?php endif; ?>
 
-<div class="footer">
-    <div class="container clearfix">
+  </div></div> <!-- /#main, /#main-wrapper -->
 
-        <div class="f_col f_col_1">
-            <h3>Vehicles:</h3>
-            <ul>
-                <li><a href="#"><span>Motorbikes</span></a></li>
-                <li><a href="#"><span>Compacts</span></a></li>
-                <li><a href="#"><span>Sedans</span></a></li>
-                <li><a href="#"><span>4x4 SUVs</span></a></li>
-                <li><a href="#"><span>Pickups</span></a></li>
-                <li><a href="#"><span>Vans & Trucks</span></a></li>
-            </ul>
-        </div>
-        <!--/ footer col 1 -->
+  <?php if ($page['triptych_first'] || $page['triptych_middle'] || $page['triptych_last']): ?>
+    <div id="triptych-wrapper"><div id="triptych" class="clearfix">
+      <?php print render($page['triptych_first']); ?>
+      <?php print render($page['triptych_middle']); ?>
+      <?php print render($page['triptych_last']); ?>
+    </div></div> <!-- /#triptych, /#triptych-wrapper -->
+  <?php endif; ?>
 
-        <div class="f_col f_col_2">
-            <h3>Services:</h3>
-            <ul>
-                <li><a href="#"><span>Buy a car</span></a></li>
-                <li><a href="#"><span>Sell your Car</span></a></li>
-                <li><a href="#"><span>Buy Back</span></a></li>
-                <li><a href="#"><span>Repair Shop </span></a></li>
-            </ul>
-        </div>
-        <!--/ footer col 2 -->
+  <div id="footer-wrapper"><div class="section">
 
-        <div class="f_col f_col_3">
-            <h3>Privacy:</h3>
-            <ul>
-                <li><a href="#"><span>Terms & Conditions</span></a></li>
-                <li><a href="#"><span>Privacy Statement</span></a></li>
-                <li><a href="#"><span>F.A.Q.</span></a></li>
-                <li><a href="#"><span>Support</span></a></li>
-                <li><a href="#"><span>Confidentiality</span></a></li>
-            </ul>
-        </div>
-        <!--/ footer col 3 -->
+    <?php if ($page['footer_firstcolumn'] || $page['footer_secondcolumn'] || $page['footer_thirdcolumn'] || $page['footer_fourthcolumn']): ?>
+      <div id="footer-columns" class="clearfix">
+        <?php print render($page['footer_firstcolumn']); ?>
+        <?php print render($page['footer_secondcolumn']); ?>
+        <?php print render($page['footer_thirdcolumn']); ?>
+        <?php print render($page['footer_fourthcolumn']); ?>
+      </div> <!-- /#footer-columns -->
+    <?php endif; ?>
 
-        <div class="f_col f_col_4">
-            <h3>OUR SHOWROOM</h3>
-            <div class="footer_address">
-                <div class="address">
-                    21 Sunset Blvd, Los Angeles<br>
-                    California, 90453
-                </div>
-                <div class="hours">
-                    Mon - Fri: 9AM - 7 PM<br>
-                    Sat - Sun: 9AM - 2 PM
-                </div>
-                <a href="contact.html" class="notice">View Bigger Map</a>
-            </div>
-            <div class="footer_map" style="background:url(http://namhan.example.com/sites/all/themes/namhan/images/temp/footer_map.jpg);"><a href="contact.html" class="amap"></a></div>
-        </div>
-        <!--/ footer col 4 -->
+    <?php if ($page['footer']): ?>
+      <div id="footer" class="clearfix">
+        <?php print render($page['footer']); ?>
+      </div> <!-- /#footer -->
+    <?php endif; ?>
 
-        <div class="clear"></div>
+  </div></div> <!-- /.section, /#footer-wrapper -->
 
-        <div class="footer_social">
-            <div class="social_inner">
-                <a href="#" class="social-google"><span>Google +1</span></a>
-                <a href="#" class="social-fb"><span>Facebook</span></a>
-                <a href="#" class="social-twitter"><span>Twitter</span></a>
-                <a href="#" class="social-dribble"><span>Dribble</span></a>
-                <a href="#" class="social-linkedin"><span>LinkedIn</span></a>
-                <a href="#" class="social-vimeo"><span>Vimeo</span></a>
-                <a href="#" class="social-flickr"><span>Flickr</span></a>
-                <a href="#" class="social-da"><span>Devianart</span></a>
-            </div>
-        </div>
-
-        <div class="footer_contacts">
-            <span class="phone">555-39.84.35</span>
-            <span class="email">hello@autotrader.com</span>
-        </div>
-
-        <div class="copyright">
-            AutoTrader Wordpress theme by <a href="http://themefuse.com">Themefuse</a>  &nbsp;|&nbsp;  <a href="http://themefuse.com" class="link_white">Premium WordPress themes</a>
-        </div>
-
-    </div>
-</div>
-
-</div>
+</div></div> <!-- /#page, /#page-wrapper -->
