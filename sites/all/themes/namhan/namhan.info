@@ -34,6 +34,7 @@ regions[header] = Header
 ;regions[featured] = Featured
 regions[content] = Content
 regions[homepage_content] = Home Page Content
+regions[homepage_news] = Home Page News
 ;regions[sidebar_first] = Sidebar first
 ;regions[sidebar_second] = Sidebar second
 

@@ -66,112 +66,12 @@
 <?php endif; ?>
 <div class="middle_row row_light_gray">
     <div class="container clearfix">
-        <?php print render($page['homepage_content']); ?>
-        <!-- special offer -->
-        <div class="special_offers">
-            <h2>SPECIAL DEALS</h2>
-
-            <div id="special_offers">
-                <div class="special_item">
-                    <div class="special_image">
-                        <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/special_offer_1.jpg" alt=""></a>
-                    </div>
-                    <div class="special_text">
-                        <h3><a href="offers-details.html">Range Rover Evoque</a></h3>
-                        <div class="info_row"><span>FIRST REG:</span> FEB 2013</div>
-                        <div class="info_row"><span>FUEL CONS:</span> 32,6 MPG</div>
-                        <div class="info_row"><span>MILEAGE</span> 170,443</div>
-                        <div class="special_price">$32.690</div>
-                    </div>
-                </div>
-
-                <div class="special_item">
-                    <div class="special_image">
-                        <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/special_offer_2.jpg" alt=""></a>
-                    </div>
-                    <div class="special_text">
-                        <h3><a href="offers-details.html">Alfa Romeo Mito</a></h3>
-                        <div class="info_row"><span>FIRST REG:</span> AUG 2012</div>
-                        <div class="info_row"><span>FUEL CONS:</span> 56,6 MPG</div>
-                        <div class="info_row"><span>MILEAGE</span> 30,443</div>
-                        <div class="special_price">$15.690</div>
-                    </div>
-                </div>
-
-                <div class="special_item">
-                    <div class="special_image">
-                        <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/special_offer_3.jpg" alt=""></a>
-                    </div>
-                    <div class="special_text">
-                        <h3><a href="offers-details.html">Mercedes CLA 220d</a></h3>
-                        <div class="info_row"><span>FIRST REG:</span> NOV 2012</div>
-                        <div class="info_row"><span>FUEL CONS:</span> 42,6 MPG</div>
-                        <div class="info_row"><span>MILEAGE</span> 12,443</div>
-                        <div class="special_price">$44.690</div>
-                    </div>
-                </div>
-
-                <div class="special_item">
-                    <div class="special_image">
-                        <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/special_offer_4.jpg" alt=""></a>
-                    </div>
-                    <div class="special_text">
-                        <h3><a href="offers-details.html">Tesla Model S Prestige</a></h3>
-                        <div class="info_row"><span>FIRST REG:</span> FEB 2013</div>
-                        <div class="info_row"><span>FUEL CONS:</span> 32,6 MPG</div>
-                        <div class="info_row"><span>MILEAGE</span> 170,443</div>
-                        <div class="special_price">$32.690</div>
-                    </div>
-                </div>
-
-                <div class="special_item">
-                    <div class="special_image">
-                        <a href="offers-details.html"><img src="http://namhan.example.com/sites/all/themes/namhan/images/temp/special_offer_5.jpg" alt=""></a>
-                    </div>
-                    <div class="special_text">
-                        <h3><a href="offers-details.html">Renault</a></h3>
-                        <div class="info_row"><span>FIRST REG:</span> FEB 2013</div>
-                        <div class="info_row"><span>FUEL CONS:</span> 32,6 MPG</div>
-                        <div class="info_row"><span>MILEAGE</span> 20,443</div>
-                        <div class="special_price">$27.690</div>
-                    </div>
-                </div>
-
-            </div>
-            <a class="prev" id="special_offers_prev" href="#"></a>
-            <a class="next" id="special_offers_next" href="#"></a>
-
-            <div class="link_more"><a href="#">View All Special Offers</a></div>
-
-            <script>
-                jQuery(document).ready(function($) {
-                    function carSpecicalInit() {
-                        var car_specical = $('#special_offers');
-                        car_specical.carouFredSel({
-                            prev : "#special_offers_prev",
-                            next : "#special_offers_next",
-                            infinite: true,
-                            circular: false,
-                            auto: false,
-                            width: '100%',
-                            direction: "down",
-                            scroll: {
-                                items : 1
-                            }
-                        });
-                    }
-                    $(window).load(function() {
-                        carSpecicalInit();
-                    });
-                    var resizeTimer;
-                    $(window).resize(function() {
-                        clearTimeout(resizeTimer);
-                        resizeTimer = setTimeout(carSpecicalInit, 100);
-                    });
-                });
-            </script>
+        <div class="week_offer">
+            <?php print render($page['homepage_content']); ?>
         </div>
-        <!--/ special offer -->
+        <div class="special_offers">
+            <?php print render($page['homepage_news']); ?>
+        </div>
     </div>
 </div>
 
